@@ -46,12 +46,12 @@ class Bootcamp {
     this.students = [];
   }
   registerStudent(newStudent) {
-    if (this.students.length == 0 || this.students.every(student => student.email !== newStudent.email)) {
+    if (this.students.every(student => student.email !== newStudent.email)) {
       this.students.push(newStudent);
       console.log(`Registering ${newStudent.email} to ${this.name}`);
     } else {
       console.log(`${newStudent.email} already registered to ${this.name}`);
     }
-      return this.students;
+  return this.students;
   }
 }
