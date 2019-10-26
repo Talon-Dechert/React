@@ -27,7 +27,6 @@ class App extends Component {
     );
   }
   //* The <Menu dishes={this.state.dishes} /> makes the dishes state pass down into the menu component
-  //! Hopefully the use of 'dishes' as a class can be explained to me
 }
 
 export default App;

@@ -25,21 +25,6 @@ class Menu extends Component {
     this.setState({ selectedDish: dish });
   }
 
-  renderDish(dish) {
-    if (dish != null) {
-      return (
-        <Card>
-          <CardImg width="100%" src={dish.image} alt={dish.name} />
-          <CardBody>
-            <CardTitle>{dish.name}</CardTitle>
-            <CardText>{dish.description}</CardText>
-          </CardBody>
-        </Card>
-      );
-    } else {
-      return <div></div>;
-    }
-  }
   //* Render is what will always show up from this component. Return is what the component will
   //* always be returning for updates
   render() {
