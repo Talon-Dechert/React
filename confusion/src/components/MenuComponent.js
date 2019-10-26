@@ -7,6 +7,7 @@ import {
   CardBody,
   CardTitle
 } from 'reactstrap';
+import DishDetail from './DishDetailComponent';
 
 class Menu extends Component {
   constructor(props) {
@@ -39,6 +40,8 @@ class Menu extends Component {
       return <div></div>;
     }
   }
+  //* Render is what will always show up from this component. Return is what the component will
+  //* always be returning for updates
   render() {
     //* Instead of this.state.dishes, we are taking in props from above now with this.props.dishes
     const menu = this.props.dishes.map(dish => {
@@ -57,11 +60,7 @@ class Menu extends Component {
     return (
       <div className="container">
         <div className="row">{menu}</div>
-        <div className="row">
-          <div className="col-12 col-md-5 m-1">
-            {this.renderDish(this.state.selectedDish)}
-          </div>
-        </div>
+        <DishDetail dish={this.state.selectedDish} />
       </div>
     );
   }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import Menu from './components/MenuComponent';
 import { DISHES } from './shared/dishes';
@@ -27,7 +26,8 @@ class App extends Component {
       </div>
     );
   }
-  //* The <Menu dishes={this.state.dishes} /> makes the dishes props pass down into the menu component
+  //* The <Menu dishes={this.state.dishes} /> makes the dishes state pass down into the menu component
+  //! Hopefully the use of 'dishes' as a class can be explained to me
 }
 
 export default App;
