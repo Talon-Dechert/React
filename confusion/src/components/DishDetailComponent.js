@@ -24,9 +24,13 @@ class DishDetail extends Component {
     const commentList = comments.map(comment => {
       return (
         <ul key={comment.id} className="list-unstyled">
-          <li>{comment.comment}</li>
           <li>
-            {comment.author}, {comment.date}
+            <p>{comment.comment}</p>
+          </li>
+          <li>
+            <p>
+              --{comment.author}, {comment.date}
+            </p>
           </li>
         </ul>
       );
