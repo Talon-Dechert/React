@@ -6,6 +6,8 @@ import DishDetail from './DishDetailComponent';
 
 class Main extends Component {
   constructor(props) {
+    //* Super refers to the parent class constructor, you can't use 'this' in a constructor until you've
+    //* called the parent constructor. This enforces that the parent constructor is running first.
     super(props);
     this.state = {
       dishes: DISHES,
