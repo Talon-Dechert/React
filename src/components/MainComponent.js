@@ -3,10 +3,6 @@ import Home from './HomeComponent';
 import Menu from './MenuComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
-import { DISHES } from '../shared/dishes';
-import { COMMENTS } from '../shared/comments';
-import { PROMOTIONS } from '../shared/promotions';
-import { LEADERS } from '../shared/leaders';
 import DishDetail from './DishDetailComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
@@ -33,12 +29,6 @@ class Main extends Component {
     //* Super refers to the parent class constructor, you can't use 'this' in a constructor until you've
     //* called the parent constructor. This enforces that the parent constructor is running first.
     super(props);
-    this.state = {
-      dishes: DISHES,
-      comments: COMMENTS,
-      promotions: PROMOTIONS,
-      leaders: LEADERS
-    };
   }
 
   render() {
@@ -60,7 +50,7 @@ class Main extends Component {
               dish => dish.id === parseInt(match.params.dishId, 10)
             )[0]
           }
-          comments={this.state.comments.filter(
+          comments={this.props.comments.filter(
             comment => comment.dishId === parseInt(match.params.dishId, 10)
           )}
           addComment={this.props.addComment}
