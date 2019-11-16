@@ -43,7 +43,7 @@ export const addDishes = dishes => ({
   payload: dishes
 });
 
-//Comments action creators
+//!Comments action creators
 export const addComment = comment => ({
   type: ActionTypes.ADD_COMMENT,
   payload: comment
@@ -209,3 +209,59 @@ export const addLeaders = leaders => ({
   type: ActionTypes.ADD_LEADERS,
   payload: leaders
 });
+
+//Feedback action creator
+export const postFeedback = (
+  firstname,
+  lastname,
+  telnum,
+  email,
+  message,
+  agree,
+  contactType
+) => dispatch => {
+  const newFeedback = {
+    firstname: firstname,
+    lastname: lastname,
+    telnum: telnum,
+    email: email,
+    message: message,
+    agree: agree,
+    contactType: contactType
+  };
+  // newFeedback.date = new Date().toISOString();
+
+  return fetch(baseUrl + 'feedback', {
+    method: 'POST',
+    body: JSON.stringify(newFeedback),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'same-origin'
+  })
+    .then(
+      response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            'Error ' + response.status + ': ' + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      //add a variable for an error response in case no response from server at all
+      error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      }
+    )
+    .then(response => response.json())
+    .then(response =>
+      alert('Thank you for your feedback! \n' + JSON.stringify(response))
+    )
+    .catch(error => {
+      console.log('Post comments', error.message);
+    });
+};
