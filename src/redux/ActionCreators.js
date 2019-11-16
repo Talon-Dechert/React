@@ -1,5 +1,4 @@
 import * as ActionTypes from './ActionTypes';
-import { DISHES } from '../shared/dishes';
 import { baseUrl } from '../shared/baseUrl';
 
 //Dishes action creators
@@ -45,15 +44,52 @@ export const addDishes = dishes => ({
 });
 
 //Comments action creators
-export const addComment = (dishId, rating, author, comment) => ({
+export const addComment = comment => ({
   type: ActionTypes.ADD_COMMENT,
-  payload: {
+  payload: comment
+});
+
+export const postComment = (dishId, rating, author, comment) => dispatch => {
+  const newComment = {
     dishId: dishId,
     rating: rating,
     author: author,
     comment: comment
-  }
-});
+  };
+  newComment.date = new Date().toISOString();
+
+  return fetch(baseUrl + 'comments', {
+    method: 'POST',
+    body: JSON.stringify(newComment),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'same-origin'
+  })
+    .then(
+      response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            'Error ' + response.status + ': ' + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      //add a variable for an error response in case no response from server at all
+      error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      }
+    )
+    .then(response => response.json())
+    .then(response => dispatch(addComment(response)))
+    .catch(error => {
+      console.log('Post comments', error.message);
+    });
+};
 
 export const fetchComments = () => dispatch => {
   return fetch(baseUrl + 'comments')
